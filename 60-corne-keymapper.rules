@@ -1,0 +1,9 @@
+# Give the logged-in user access to the Corne's raw-HID (VIA/Vial) interface.
+# Install:
+#   sudo cp 60-corne-keymapper.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules && sudo udevadm trigger
+# Then replug the keyboard.
+KERNEL=="hidraw*", ATTRS{idVendor}=="4653", ATTRS{idProduct}=="0001", MODE="0660", GROUP="users", TAG+="uaccess"
+
+# Same access for any QMK/VIA board, harmless if you only own the Corne.
+KERNEL=="hidraw*", ATTRS{idVendor}=="feed", MODE="0660", GROUP="users", TAG+="uaccess"

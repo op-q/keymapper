@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corne Keymapper</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="brand">
+    <span class="logo">⌨</span>
+    <div>
+      <h1>Corne Keymapper</h1>
+      <p id="devline" class="sub">connecting…</p>
+    </div>
+  </div>
+  <div class="actions">
+    <label class="era">keycodes
+      <select id="era">
+        <option value="auto">auto</option>
+        <option value="modern">modern (QMK ≥ 0.19)</option>
+        <option value="legacy">legacy (QMK &lt; 0.19)</option>
+      </select>
+    </label>
+    <button id="btn-view" class="ghost">Review all layers</button>
+    <button id="btn-reload" class="ghost">Reload</button>
+    <button id="btn-export" class="ghost">Export</button>
+    <button id="btn-import" class="ghost">Import</button>
+    <button id="btn-reset" class="danger">Reset to firmware</button>
+  </div>
+</header>
+
+<div id="banner" class="banner hidden"></div>
+
+<nav id="layers" class="layers"></nav>
+
+<main id="board-wrap"></main>
+
+<footer class="legend">
+  <span><i class="sw letters"></i>letters</span>
+  <span><i class="sw numbers"></i>numbers</span>
+  <span><i class="sw punct"></i>punctuation</span>
+  <span><i class="sw mods"></i>modifiers</span>
+  <span><i class="sw layers"></i>layer</span>
+  <span><i class="sw modtap"></i>tap-hold</span>
+  <span><i class="sw media"></i>media / mouse</span>
+  <span><i class="sw special"></i>transparent / none</span>
+  <span class="hint">Click a key to remap it. Changes are written to the keyboard immediately.</span>
+</footer>
+
+<!-- keycode picker -->
+<div id="picker" class="modal hidden">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div>
+        <h2 id="pick-title">Remap key</h2>
+        <p id="pick-sub" class="sub"></p>
+      </div>
+      <button id="pick-close" class="ghost">Close</button>
+    </div>
+
+    <input id="search" type="search" placeholder="Search keycodes — try “vol”, “f11”, “left”, “esc”…" autocomplete="off">
+
+    <div class="builders">
+      <details>
+        <summary>Tap–hold builder</summary>
+        <div class="builder">
+          <div class="brow">
+            <label>Hold for
+              <select id="mt-kind">
+                <option value="mod">modifier</option>
+                <option value="layer">layer</option>
+              </select>
+            </label>
+            <span id="mt-mod-wrap"><label>modifier <select id="mt-mod"></select></label></span>
+            <span id="mt-layer-wrap" class="hidden"><label>layer <select id="mt-layer"></select></label></span>
+            <label>Tap for <select id="mt-key"></select></label>
+            <button id="mt-apply">Assign</button>
+          </div>
+          <p class="sub" id="mt-preview"></p>
+        </div>
+      </details>
+      <details>
+        <summary>Raw keycode</summary>
+        <div class="builder">
+          <div class="brow">
+            <label>hex <input id="raw-hex" type="text" placeholder="0x5221" size="10"></label>
+            <button id="raw-apply">Assign</button>
+            <span class="sub" id="raw-preview"></span>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div id="cats" class="cats"></div>
+    <div id="grid" class="grid"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<input id="file" type="file" accept="application/json" class="hidden">
+
+<script src="app.js"></script>
+</body>
+</html>
